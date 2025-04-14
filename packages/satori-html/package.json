@@ -1,7 +1,7 @@
 {
   "name": "@gotedo/satori-html",
   "type": "module",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/gotedo/satori-html"
@@ -14,7 +14,7 @@
     "dev": "vitest dev",
     "build": "pnpm run build:esm && pnpm run build:cjs",
     "build:esm": "tsc -p tsconfig.esm.json",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json && node scripts/rename_to_cjs.mjs",
     "test": "vitest run",
     "release": "np",
     "prepublishOnly": "pnpm run build",
@@ -25,12 +25,12 @@
     "dist",
     "CHANGELOG.md"
   ],
-  "main": "./dist/cjs/index.js",
+  "main": "./dist/cjs/index.cjs",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/types/index.d.ts",
   "exports": {
     "import": "./dist/esm/index.js",
-    "require": "./dist/cjs/index.js"
+    "require": "./dist/cjs/index.cjs"
   },
   "author": {
     "name": "Ndianabasi Udonkang",
