@@ -1,4 +1,4 @@
-name: CI
+name: Test and Publish
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name == 'pull_request_target' && github.head_ref || github.ref }}
@@ -18,7 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        node: [18, 20]
+        node: [18, 20, 22]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
@@ -59,4 +59,4 @@ jobs:
           title: "chore: release"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_GOTEDO_PACKAGES_PUBLISH_TOKEN }}
