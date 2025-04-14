@@ -5,7 +5,7 @@ import satori, { SatoriOptions } from "satori";
 
 describe("svg", () => {
   let fonts: SatoriOptions["fonts"];
-  initFonts((f) => {
+  initFonts(f => {
     fonts = f;
   });
 
@@ -13,7 +13,7 @@ describe("svg", () => {
     const result = await satori(html`<div>Hello world</div>`, {
       width: 100,
       height: 100,
-      fonts,
+      fonts
     });
     expect(toImage(result, 100)).toMatchImageSnapshot();
   });
@@ -24,7 +24,7 @@ describe("svg", () => {
       {
         width: 100,
         height: 100,
-        fonts,
+        fonts
       }
     );
     expect(toImage(result, 100)).toMatchImageSnapshot();
@@ -41,7 +41,7 @@ describe("svg", () => {
       {
         width: 100,
         height: 100,
-        fonts,
+        fonts
       }
     );
     expect(toImage(result, 100)).toMatchImageSnapshot();
@@ -80,9 +80,9 @@ describe("svg", () => {
       {
         width: 800,
         height: 150,
-        fonts,
+        fonts
       }
     );
-    expect(toImage(result, 100)).toMatchImageSnapshot();
+    expect(toImage(result, 800)).toMatchImageSnapshot();
   });
 });

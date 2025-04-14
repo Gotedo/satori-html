@@ -2,6 +2,8 @@ import { beforeAll, expect } from "vitest";
 import fs from "node:fs/promises";
 import { Resvg } from "@resvg/resvg-js";
 import { toMatchImageSnapshot } from "jest-image-snapshot";
+import os from "node:os";
+import { randomUUID } from "node:crypto";
 
 import type { SatoriOptions } from "satori";
 import { fileURLToPath } from "node:url";
@@ -15,8 +17,8 @@ export function initFonts(callback: (fonts: SatoriOptions["fonts"]) => void) {
         name: "Roboto",
         data: fontData,
         weight: 400,
-        style: "normal",
-      },
+        style: "normal"
+      }
     ]);
   });
 }
@@ -25,19 +27,27 @@ export function toImage(svg: string, width: number = 100) {
   const resvg = new Resvg(svg, {
     fitTo: {
       mode: "width",
-      value: width,
+      value: width
     },
     font: {
       // As system fallback font
       fontFiles: [
-        fileURLToPath(new URL("./assets/Inter-Regular.woff", import.meta.url)),
+        fileURLToPath(new URL("./assets/Inter-Regular.woff", import.meta.url))
       ],
       loadSystemFonts: false,
-      defaultFontFamily: "Playfair Display",
-    },
+      defaultFontFamily: "Playfair Display"
+    }
   });
   const pngData = resvg.render();
   return pngData.asPng();
+}
+
+export async function saveImageToDisk(buffer: Buffer) {
+  const dir = os.tmpdir() + "/satori_html";
+  await fs.mkdir(dir, { recursive: true });
+  const filename = `${dir}/${randomUUID()}.png`;
+  await fs.writeFile(filename, buffer);
+  console.log("Buffer has been written to file %s", filename);
 }
 
 declare global {
