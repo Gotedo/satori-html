@@ -15,7 +15,11 @@
     "build": "pnpm run build:esm && pnpm run build:cjs",
     "build:esm": "tsc -p tsconfig.esm.json",
     "build:cjs": "tsc -p tsconfig.cjs.json",
-    "test": "vitest run"
+    "test": "vitest run",
+    "release": "np",
+    "prepublishOnly": "pnpm run build",
+    "version": "pnpm run build",
+    "prepublish": "pnpm run test"
   },
   "files": [
     "dist",
@@ -40,9 +44,20 @@
     "@resvg/resvg-js": "^2.1.0",
     "@types/node": "^18.8.4",
     "jest-image-snapshot": "^5.2.0",
+    "np": "^10.2.0",
     "satori": "^0.0.38",
     "typescript": "^4.8.4",
     "vite": "^3.1.7",
     "vitest": "^0.24.1"
+  },
+  "np": {
+    "yarn": false,
+    "yolo": true,
+    "contents": ".",
+    "anyBranch": false,
+    "publish": true,
+    "branch": "main",
+    "releaseDraft": true,
+    "message": "chore(release): bump version to %s 🚀"
   }
 }
