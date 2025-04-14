@@ -1,33 +1,36 @@
 {
-  "name": "satori-html",
+  "name": "@gotedo/satori-html",
   "type": "module",
   "version": "0.3.2",
   "repository": {
     "type": "git",
-    "url": "https://github.com/natemoo-re/satori-html"
+    "url": "https://github.com/gotedo/satori-html"
   },
   "bugs": {
-    "url": "https://github.com/natemoo-re/satori-html/issues"
+    "url": "https://github.com/gotedo/satori-html/issues"
   },
-  "homepage": "https://github.com/natemoo-re/satori-html#README",
+  "homepage": "https://github.com/gotedo/satori-html#README",
   "scripts": {
     "dev": "vitest dev",
-    "build": "tsc -p .",
+    "build": "pnpm run build:esm && pnpm run build:cjs",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
     "test": "vitest run"
   },
   "files": [
     "dist",
     "CHANGELOG.md"
   ],
-  "types": "./dist/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/types/index.d.ts",
   "exports": {
-    ".": "./dist/index.js",
-    "./package.json": "./package.json"
+    "import": "./dist/esm/index.js",
+    "require": "./dist/cjs/index.js"
   },
   "author": {
-    "name": "Nate Moore",
-    "email": "nate@natemoo.re",
-    "url": "https://twitter.com/n_moore"
+    "name": "Ndianabasi Udonkang",
+    "url": "https://twitter.com/_ndianabasi"
   },
   "license": "MIT",
   "dependencies": {
